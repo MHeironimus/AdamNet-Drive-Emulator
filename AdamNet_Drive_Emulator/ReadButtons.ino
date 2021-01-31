@@ -20,6 +20,8 @@ byte ReadButtons(){                                                // Read the B
   byte SwapButtonState = digitalRead(SwapButtonPin);
   if (EnableAnalogButtons){
     AnalogButtonState = analogRead(0);          // Read Analog pin 0 (Takes 110 us)
+    // Serial.print(F("Button Voltage: "));
+    // Serial.println(AnalogButtonState);
     if(AnalogButtonState < AnalogTriggerRight){
       delay(DebounceDelay);
       AnalogButtonState = analogRead(0);

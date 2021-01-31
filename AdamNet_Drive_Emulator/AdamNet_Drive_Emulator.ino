@@ -24,7 +24,7 @@ const byte StatusLedWrite[4] = {31,33,35,37};  // Pins for Write Status LED. The
 const String BootDisk = "boot.dsk";        // Name of disk to auto-mount on Device 4. This will override the eeprom file. Set to "" for no boot disk
 const String BootDiskDir = "/";            // Directory that the boot disk is in.
 const byte BootDiskType = 10;              // Set the file type for the boot disk. 10 = Disk, 11 = DDP. No other type is valid.
-const byte AnalogButtonSensitivity = 100;  // This will change the analog button sensitivity. This is a percentage of the default values.
+const byte AnalogButtonSensitivity = 80;  // This will change the analog button sensitivity. This is a percentage of the default values.
 const unsigned int LCDScrollDelay = 300;   // How many milliseconds between the bottom LCD line scrolls
 const unsigned int LCDScrollDelayStart = 2000;// Delay for the bottom LCD line to start scrolling
 const byte EnableFACE = true;              // True will enable the default Adam FACE command for formatting.
