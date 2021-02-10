@@ -12,6 +12,7 @@
 const byte Version[3] =  {0,9,1};          // ADE Version Number
 const byte StatusLEDState = HIGH;          // Initial state for the status LED's 
                                            // LOW = Normally off, on for activity   HIGH = Normally on, off for activity (ADE Lite = HIGH)
+const byte ActivityLEDState = LOW;         // Initial state for the Activity LED
 const byte EnableAnalogButtons = true;     // For the 1602 Keypad Shield Buttons, leave this as 'true'.  (ADE Pro / ADE Lite = false)
                                            // If you are using individual digital buttons set it to 'false'.
 const unsigned int StartupDelay = 0;       // Additional delay on startup in ms. 
@@ -21,12 +22,13 @@ const byte LCDNameLength = 99;             // Maximum length of file name to dis
                                            // 17 will disable scrolling. 12 or less will display 8.3 filenames (max = 99)
 const byte StatusLedRead[4] = {30,32,34,36};   // Pins for Read Status LED. These can be combined or 1 for each device. 13 is the internal LED on the Mega
 const byte StatusLedWrite[4] = {31,33,35,37};  // Pins for Write Status LED. These can be combined or 1 for each device. 13 is the internal LED on the Mega
+const byte ActivityLed = 13;               // Pin for the Activity LED. 13 is the internal LED on the Mega
 const String BootDisk = "boot.dsk";        // Name of disk to auto-mount on Device 4. This will override the eeprom file. Set to "" for no boot disk
 const String BootDiskDir = "/";            // Directory that the boot disk is in.
 const byte BootDiskType = 10;              // Set the file type for the boot disk. 10 = Disk, 11 = DDP. No other type is valid.
-const byte AnalogButtonSensitivity = 80;  // This will change the analog button sensitivity. This is a percentage of the default values.
+const byte AnalogButtonSensitivity = 80;   // This will change the analog button sensitivity. This is a percentage of the default values.
 const unsigned int LCDScrollDelay = 300;   // How many milliseconds between the bottom LCD line scrolls
-const unsigned int LCDScrollDelayStart = 2000;// Delay for the bottom LCD line to start scrolling
+const unsigned int LCDScrollDelayStart = 2000; // Delay for the bottom LCD line to start scrolling
 const byte EnableFACE = true;              // True will enable the default Adam FACE command for formatting.
                                            // True will cause problems with disk images greater than 64,205 (0xFACD) blocks.
                                            // False will disable the FACE command and treat 0x0000FACE as a normal block.
@@ -112,7 +114,7 @@ void setup(){
   lcd.begin(16, 2);                        // Start the LCD screen
   lcd.clear();
   lcd.setCursor(0,0);
-  lcd.print(F("ADE      v"));
+  lcd.print(F("ADE (MCH) v"));
   lcd.print(String(Version[0]) + "." + String(Version[1]) + String(Version[2]));
   lcd.setCursor(0,1);  
   lcd.print(F("by: Sean Myers"));
@@ -126,6 +128,8 @@ void setup(){
     pinMode(StatusLedWrite[t],OUTPUT);              // Set the Write Status LED's as output
     digitalWrite(StatusLedWrite[t],StatusLEDState); // Set the Write Status LED  
   }
+  pinMode(ActivityLed,OUTPUT);             // Set the Activity LED as output
+  digitalWrite(ActivityLed,ActivityLEDState); // Set the Activity LED
   pinMode(RightButtonPin,INPUT_PULLUP);    // Set the RightButtonPin to Input Pullup
   pinMode(UpButtonPin,INPUT_PULLUP);       // Set the UpButtonPin to Input Pullup
   pinMode(DownButtonPin,INPUT_PULLUP);     // Set the DownButtonPin to Input Pullup

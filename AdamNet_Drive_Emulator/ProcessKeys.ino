@@ -292,9 +292,9 @@ void ProcessKeys(){                                                // Process a 
         LCDTopDelay = 1;
         for (int blinks = 1; blinks <= NumberofBlinks; blinks++){
           delay(200);
-          digitalWrite(StatusLedRead[0], !digitalRead(StatusLedRead[0]));
+          digitalWrite(ActivityLed, !digitalRead(ActivityLed));
           delay(200);
-          digitalWrite(StatusLedRead[0], !digitalRead(StatusLedRead[0]));
+          digitalWrite(ActivityLed, !digitalRead(ActivityLed));
         }
       }
     }
